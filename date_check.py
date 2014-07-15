@@ -32,10 +32,13 @@ def check_month(month):
 
 def check_year(year):	
 	try:
-		return datetime.datetime.strptime(year,"%Y")
+		if len(year) == 4:
+			return datetime.datetime.strptime(year,"%Y")
+		else:
+			return datetime.datetime.strptime(year,"%y")
 	except ValueError:
 		try:
-			return datetime.datetime.strptime(month, r"%Y"))
+			return datetime.datetime.strptime(year, r"%y"))
 		except ValueError:
 			try:
 				return year.is_digit()
@@ -44,13 +47,16 @@ def check_year(year):
 
 def check_dow(dow):
 	try:
-		return datetime.datetime.strptime(year,"%a")
+		return datetime.datetime.strptime(dow,"%a")
 		except ValueError:
 			try:
-				return datetime.datetime.strptime(month, r"%A"))
+				return datetime.datetime.strptime(dow, r"%A"))
 			except ValueError:
-				year.is_digit()
-				return False
+				if dow.is_digit():
+					return False
+				else:
+					return True
+				
 
 def check_format(value, format="A"):
 	if format is None:
